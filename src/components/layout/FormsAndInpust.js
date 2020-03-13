@@ -1,77 +1,57 @@
-import React from 'react';
+import React , {useState, useEffect} from 'react';
 
-class FormsAndInpust extends React.Component{
-    constructor(props){
-        super(props)
-    
-        this.state = {
-            age : '',
-            gender : ''
-        }
-    }
+function FormsAndInpust (props){
+    const [list, setList] = useState([]);
+    const [name, setName] = useState('');
+    const [age, setAge] = useState(0);
+    const [gender, setGender] = useState('male')
 
-
-    handleSubmit = (e) =>{
+    const handleSubmit = (e) =>{
     e.preventDefault();
-    let data = { 
-     name: this.state.name,
-     age: this.state.age,
-     gender: this.state.gender     
-
-    }
-    this.setState({data})
-    console.log('gfhfh',data)
+    list && setList([...list, {name:name, age:age, gender:gender}])
+    console.log(list)
     e.target.reset();
-
-
-    
     }
-    handleInputChangeName = (e) =>{
-            let name = e.target.value
-        e.preventDefault();
-        this.setState({name})
-        
-        
-    }
-    handleInputChangeGender = (e) =>{
-        
-    e.preventDefault();
-    this.setState({gender: e.target.value})
-    
-    
-}
 
-    handleInputChangeAge = (e) =>{
-    e.preventDefault();
-    this.setState({age: e.target.value})
-    
-    
-}
-render(){
+    const handleInputChangeName = (e) =>{
+      let newName = e.target.value
+      setName(newName)
+    }
+
+    const handleInputChangeGender = (e) =>{
+      let newGender = e.target.value
+      setGender(newGender)
+    }
+
+    const handleInputChangeAge = (e) =>{
+        let newAge = e.target.value
+        setAge(newAge)    
+    }
 
     return(
         <div>
-            <h3>Abo Elkhawaldeh</h3>
-            <form onSubmit={this.handleSubmit}>
-                <p>The name is : {this.state.name}</p>
-                <input type='text' placeholder='your name' name='name'  onChange={this.handleInputChangeName}/>
-                <input type='number' placeholder='your age' name='age'  onChange={this.handleInputChangeAge}/>  <br />
-                <label > Male <input type='radio'  value='male' name="gender"  onChange={this.handleInputChangeGender} required/></label> 
-                <label > Female <input type='radio'   value='female' name="gender"  onChange={this.handleInputChangeGender} req/></label>
+            <h3>Ayman AlSagga</h3>
+            <form onSubmit={handleSubmit}>
+                <input type='text' placeholder='your name' name='name'  onChange={handleInputChangeName} required/>
+                <input type='number' placeholder='your age' name='age'  onChange={handleInputChangeAge} required/>  <br />
+                <label > Male <input type='radio'  value='male' name="gender"  onChange={handleInputChangeGender} required/></label> 
+                <label > Female <input type='radio'   value='female' name="gender"  onChange={handleInputChangeGender} required/></label>
                 <br />
-
-
-
                 <button>Send !</button>
             </form>
-    <h2>{this.state.data && this.state.data.name}</h2>
-    <h2>{this.state.data && this.state.data.age}</h2>
-    <h2>{this.state.data && this.state.data.gender}</h2>
-
-
+            <ul>
+            {list.map((item, i)=>{
+                console.log(item)
+                return( <li key={i}>  
+                    <span>{item.name}  </span>
+                    <span>{item.age}  </span>
+                    <span>{item.gender}</span>
+                </li>)
+            })}
+            </ul>
         </div>
     )
-}
+
 
 }
 
