@@ -1,41 +1,51 @@
 import React from 'react';
 import './App.css';
-import './components/layout/Navbar.js'
-import Navbar from './components/layout/Navbar.js';
-import FormsAndInpust from './components/layout/FormsAndInpust.js'
+ import Users from './component/Users.js'
+import Navbar from './component/Navbar.js'
+import Search from './component/Search.js'
+import axios from 'axios'
 
 
-const Header= () =>{
-    return (
-      <header>
-        <h1>Counter App</h1>
-        
-      </header>
-    )
-    };
-    
-    
-    
-    const Footer = () =>{
-      return (
-        <footer>Ayman App &copy;</footer>
-        
-        
-      )
-    };
-    
 
 class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state ={
+            users : [],
+            loading : false
+
+        }  
+    
+    }
+ async componentDidMount(){
+     let name = "aymankhawaldeh"
+     this.setState({loading : true});
+     const res = await axios.get(`https://api.github.com/search/users?q=${name}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+     this.setState({users : res.data.items , loading : false});
+ }
+ 
+  searchUsers = async text =>{
+    this.setState({loading : true});
+    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+    this.setState({users : res.data.items , loading : false});
+
+  }
+
+    
     render(){
         return(
             <React.Fragment>
-            <Navbar title="Github Finder" />
-            <FormsAndInpust />
-            <Header />
-            <Footer />
-           </React.Fragment>
+                <Navbar title = "Github Finder"/>
+                <div className="container">
+                <Search searchUsers={this.searchUsers}/>
+                {/* <UserItems /> */}
+                <Users loading={this.state.loading} users={this.state.users}/>
+                </div>
+            </React.Fragment>
         )
     }
 }
-export default App;
 
+
+
+export default App;

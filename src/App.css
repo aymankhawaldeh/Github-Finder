@@ -392,7 +392,6 @@ table th {
   .x-large {
     font-size: 3rem;
   }
-  
 
   .large {
     font-size: 2rem;
@@ -412,10 +411,4 @@ table th {
     text-align: center;
     justify-content: center;
   }
-}
-.label{
-  margin: 30%
-}
-button{
-  margin-left: 47%;
 }
