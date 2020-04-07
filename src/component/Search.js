@@ -1,38 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {Link , NavLink} from 'react-router-dom';
 
-class Search extends React.Component {
-   constructor(props){
-       super(props)
-            this.state = {
-                text: ''
-            }
-   }
+const Search =({setAlert , clearUsers , searchUsers , showClear})=> {
+       
+    const [text, setText] = useState('');
     
 
-    onSubmit = (e) =>{
+  const  onSubmit = (e) =>{
         e.preventDefault();
-        let text = this.state.text
-        this.props.searchUsers(text)
-         this.setState({text})
+        if(text === ''){
+          setAlert('Please enter something' , 'light')
+        }else{
+
+            
+          searchUsers(text)
+          setText('');
+        }
     }
-    onChange = (e) =>{
+   const onChange = (e) =>{
 
         // let text = e.target.value;
         // this.setState({text})
-        this.setState({[e.target.name] : e.target.value})
+        setText(e.target.value)
 
         
       }
-    render() { 
         return ( 
             <div>
-                <form className="form" onSubmit={this.onSubmit}>
-                    <input type="text" name="text" placeholder="Search Users..."  onChange={this.onChange}/>
+                <form className="form" onSubmit={   onSubmit}>
+                    <input type="text" name="text" placeholder="Search Users..."  onChange={onChange}/>
                     <input type="submit" value="Search" className="btn btn-dark btn-block"/>
                 </form>
+                {showClear &&(
+                                   < button className="btn btn-light btn-block" onClick={clearUsers}>Clear</button> 
+
+
+                )}
             </div>
          );
-    }
+    
 }
  
 export default Search ;
+
+
+
+    

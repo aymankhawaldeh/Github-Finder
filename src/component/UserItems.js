@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class UserItems extends React.Component{
     
@@ -11,7 +12,7 @@ class UserItems extends React.Component{
                 <img src={avatar_url} className="round-img" alt="" style={{width : '60px'}} />
                 <h3>{login}</h3>
                 <div>
-                    <a href={html_url} className="btn btn-dark btn-sm my-1" >MORE</a>
+                    <Link to={`user/${login}`} className="btn btn-dark btn-sm my-1" >MORE</Link>
                 </div>
 
 
