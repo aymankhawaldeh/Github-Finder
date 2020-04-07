@@ -17,6 +17,21 @@ class App extends React.Component{
         }  
     
     }
+
+
+    // async componentDidMount(){
+    //     let name = "aymankhawaldeh"
+    //     this.setState({loading : true});
+    //      axios.get(`https://api.github.com/search/users?q=${name}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+    //     .then(response=>{ this.setState({users : response.data.items , loading : false});})
+    //     .catch(error=>{
+    //         console.log(error)
+    //     })
+    // }
+
+
+
+
  async componentDidMount(){
      let name = "aymankhawaldeh"
      this.setState({loading : true});
