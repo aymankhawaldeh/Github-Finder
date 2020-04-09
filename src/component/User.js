@@ -18,12 +18,12 @@ const User = ({user ,loading , repos, getUser , getUserRepos, match  })=>  {
         return (
             <React.Fragment>
                 <Link to='/' className='btn btn-light'> Back To Search</Link>
-            Hireable: {''};
+            {/* Hireable: {''};
             {hireable ? (
                 <i className='fas fa-check text-success' />
                 ) : (
                     <i className='fas fa-times-circle text-danger' />
-                    )}
+                    )} */}
 
                     <div className="card grid-2">
                         <div className="all-center">
